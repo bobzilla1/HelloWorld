@@ -9,6 +9,30 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+struct MyComp : Component
+{
+	void resized() override { }
+	void paint(Graphics& g) override 
+		{ g.fillAll(Colours::green); }
+
+	void mouseEnter(const MouseEvent& e) override 
+	{
+		DBG( "MyComp mouseEnter" << counter);
+		++counter;
+	}
+	void mouseExit(const MouseEvent& e) override
+	{
+		DBG( "MyComp mouseExit" << counter);
+		++counter;
+	}
+	void mouseMove(const MouseEvent& e) override
+	{
+		DBG("MyComp mouseMove" << counter);
+		++counter;
+	}
+private:
+	int counter = 0;
+};
 
 //==============================================================================
 /*
@@ -25,8 +49,24 @@ public:
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
-
+	void mouseEnter(const MouseEvent& e) override 
+	{
+		DBG( "MainComponent mouseEnter " << counter );
+		++counter;
+	}
+	void mouseExit(const MouseEvent& e) override
+	{
+		DBG( "MainComponent mouseExit " << counter );
+		++counter;
+	}
+	void mouseMove(const MouseEvent& e) override
+	{
+		DBG("MainComponent mouseMove " << counter );
+		++counter;
+	}
 private:
+	int counter = 0;
+	MyComp comp;
     //==============================================================================
     // Your private member variables go here...
 
