@@ -13,6 +13,10 @@ MainComponent::MainComponent()
 {
 	addAndMakeVisible(comp);
 	comp.addMouseListener(this, false);
+
+	addAndMakeVisible(ownedArrayComp);
+
+	//setSize is usually the last thing we want to call
     setSize (600, 400);
 }
 
@@ -39,4 +43,14 @@ void MainComponent::resized()
     // update their positions.
 
 	comp.setBounds(30, 30, 100, 100);
+
+	// Here is where we get it positioned
+	// However big our MainComponent is, we will go from the right edge to 
+	// where our set bounds exists, and we'll make this first start at the bottom.
+	// And we want the width from our component's left edge to the rest of it.
+	ownedArrayComp.setBounds(comp.getX(),
+							comp.getBottom() + 5,
+							getWidth() - comp.getX(),
+							getHeight() - comp.getBottom());
+
 }
