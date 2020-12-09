@@ -8,6 +8,34 @@
 
 #include "MainComponent.h"
 
+DualButton::DualButton()
+{
+	addAndMakeVisible(button1);
+	addAndMakeVisible(button2);
+
+	button1.onClick = [this]()
+	{
+		DBG("Button1's size: " << this->button1.getBounds().toString());
+	};
+
+	button2.onClick = [this]()
+	{
+		DBG("Button2's size: " << this->button2.getBounds().toString());
+	};
+}
+
+void DualButton::resized()
+{
+	auto bounds = getLocalBounds();
+	button1.setBounds(bounds.removeFromLeft(30));
+	button2.setBounds(bounds);
+	//Say previously our local bounds was 100 pixels wide, now we 
+	//have a rectangle who's bounds is 70 pixels wide and that 
+	//30 pixels has been passed to button.
+}
+
+
+
 OwnedArrayComponent::OwnedArrayComponent()
 {
 	for (int i = 0; i < 10; ++i)
@@ -62,7 +90,8 @@ MainComponent::MainComponent()
 
 	addAndMakeVisible(ownedArrayComp);
 	ownedArrayComp.addMouseListener(this, true);
-	
+	addAndMakeVisible(dualButton);
+
     setSize (600, 400);
 }
 
@@ -99,4 +128,10 @@ void MainComponent::resized()
 							getWidth() - comp.getX(),
 							getHeight() - comp.getBottom());
 
+	dualButton.setBounds(comp.getBounds()
+							.withX(comp.getRight() + 5));
+	//It's actually NOT using chaining because
+	//Rectangle<>::getBounds() returns a COPY, not a reference
+	//The rectangle supplied to dualButton.setBounds() is a
+	//temporary because of this.
 }

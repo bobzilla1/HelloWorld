@@ -10,6 +10,14 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+struct DualButton : public Component
+{
+	DualButton();
+	void resized() override;
+private:
+	TextButton button1{ "button1" }, button2{ "button2" };
+};
+
 struct Widget : public Component
 {
 	Widget(int i) : num(i) {}
@@ -102,6 +110,7 @@ private:
 	//int counter = 0;
 	MyComp comp;
 	OwnedArrayComponent ownedArrayComp;
+	DualButton dualButton;
     //==============================================================================
     // Your private member variables go here...
 
