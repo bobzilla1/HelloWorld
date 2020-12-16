@@ -9,12 +9,17 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
+//struct RepeatingThing;
 struct DualButton : public Component
 {
 	DualButton();
 	void resized() override;
+	
+	void setButton1Handler(std::function<void()> f);
+	void setButton2Handler(std::function<void()> f);
+
 private:
+	//RepeatingThing& timerThing;
 	TextButton button1{ "button1" }, button2{ "button2" };
 };
 
@@ -94,7 +99,7 @@ private:
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public Component
+class MainComponent : public Component
 {
 public:
     //==============================================================================
@@ -128,8 +133,9 @@ private:
 	//int counter = 0;
 	MyComp comp;
 	OwnedArrayComponent ownedArrayComp;
-	DualButton dualButton;
 	RepeatingThing repeatingThing;
+	DualButton dualButton; //{ repeatingThing };
+
 
     //==============================================================================
     // Your private member variables go here...
