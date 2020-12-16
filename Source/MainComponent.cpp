@@ -31,10 +31,8 @@ void DualButton::resized()
 	button2.setBounds(bounds);
 	//Say previously our local bounds was 100 pixels wide, now we 
 	//have a rectangle who's bounds is 70 pixels wide and that 
-	//30 pixels has been passed to button.
+	//30 pixel wide rectangle has been passed to button1.
 }
-
-
 
 OwnedArrayComponent::OwnedArrayComponent()
 {
@@ -92,6 +90,8 @@ MainComponent::MainComponent()
 	ownedArrayComp.addMouseListener(this, true);
 	addAndMakeVisible(dualButton);
 
+	addAndMakeVisible(repeatingThing);
+
     setSize (600, 400);
 }
 
@@ -134,4 +134,6 @@ void MainComponent::resized()
 	//Rectangle<>::getBounds() returns a COPY, not a reference
 	//The rectangle supplied to dualButton.setBounds() is a
 	//temporary because of this.
+
+	repeatingThing.setBounds(dualButton.getBounds().withX(dualButton.getRight() + 5));
 }
