@@ -115,6 +115,8 @@ MainComponent::MainComponent()
 		});
 
 	addAndMakeVisible(repeatingThing);
+	addAndMakeVisible(hiResGui);
+
 
     setSize (600, 400);
 }
@@ -160,4 +162,6 @@ void MainComponent::resized()
 	//temporary because of this.
 
 	repeatingThing.setBounds(dualButton.getBounds().withX(dualButton.getRight() + 5));
+
+	hiResGui.setBounds(repeatingThing.getBounds().withX(repeatingThing.getRight() + 5));
 }
