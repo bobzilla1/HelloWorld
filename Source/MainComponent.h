@@ -9,6 +9,92 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+
+struct MyThread : Thread
+{
+	MyThread() : Thread("MyThread")
+	{
+		startThread();
+	}
+
+	~MyThread()
+	{
+		stopThread(100);
+	}
+
+	void run() override
+	{
+		while (true)
+		{
+			if (threadShouldExit())
+				break;
+			/*
+			do some work
+			*/
+
+			if (threadShouldExit())
+				break;
+
+			/*
+			do some more work
+			*/
+
+			if (threadShouldExit())
+				break;
+
+			wait(10);
+			//or
+			wait(-1);
+			/*
+			MyThread mt;
+			mt.notify();
+			*/
+		}
+	}
+};
+
+//========================================
+
+struct ImageProcessingThread : Thread
+{
+	ImageProcessingThread(int w_, int h_);
+	~ImageProcessingThread();
+	void run() override;
+	void setUpdateRendererFunc(std::function<void(Image&&)> f);
+private:
+	int w{ 0 }, h{ 0 };
+	std::function<void(Image&&)> updateRenderer;
+	Random r;
+};
+
+//========================================
+
+struct LambdaTimer : Timer
+{
+	LambdaTimer(int ms, std::function<void()> f);
+	~LambdaTimer();
+	void timerCallback() override;
+private:
+	std::function<void()> lambda;
+};
+
+//========================================
+#include <array>
+struct Renderer : Component, AsyncUpdater
+{
+	Renderer();
+	~Renderer();
+	void paint(Graphics& g) override;
+	void handleAsyncUpdate() override;
+private:
+	std::unique_ptr <ImageProcessingThread> processingThread;
+	std::unique_ptr <LambdaTimer> lambdaTimer;
+	bool firstImage = true;
+	std::array<Image, 2> imageToRender;
+};
+
+//========================================
+
 //struct RepeatingThing;
 struct DualButton : public Component
 {
@@ -182,6 +268,7 @@ private:
 	RepeatingThing repeatingThing;
 	DualButton dualButton; //{ repeatingThing };
 	MyAsyncHighResGui hiResGui;
+	Renderer renderer;
 
 
     //==============================================================================
