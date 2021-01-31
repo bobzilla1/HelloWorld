@@ -236,7 +236,8 @@ MainComponent::MainComponent()
 
 	addAndMakeVisible(repeatingThing);
 	addAndMakeVisible(hiResGui);
-	addAndMakeVisible(renderer);
+
+//	addAndMakeVisible(renderer);
 
     setSize (600, 400);
 }
@@ -285,5 +286,5 @@ void MainComponent::resized()
 
 	hiResGui.setBounds(repeatingThing.getBounds().withX(repeatingThing.getRight() + 5));
 
-	renderer.setBounds(hiResGui.getBounds().withX(hiResGui.getRight() + 5));
+	//renderer.setBounds(hiResGui.getBounds().withX(hiResGui.getRight() + 5));
 }

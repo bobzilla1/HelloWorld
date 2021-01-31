@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "DataRace.h"
 
 struct MyThread : Thread
 {
@@ -268,9 +269,9 @@ private:
 	RepeatingThing repeatingThing;
 	DualButton dualButton; //{ repeatingThing };
 	MyAsyncHighResGui hiResGui;
-	Renderer renderer;
-
-
+	//Renderer renderer;
+	Test test;
+	
     //==============================================================================
     // Your private member variables go here...
 

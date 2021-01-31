@@ -3,6 +3,8 @@
 <JUCERPROJECT id="eEvLoV" name="HelloWorld" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="ZQiLCK" name="HelloWorld">
     <GROUP id="{A2D0C1F3-ED83-0170-B83D-C9F3DCA22497}" name="Source">
+      <FILE id="oOJdV7" name="DataRace.cpp" compile="1" resource="0" file="Source/DataRace.cpp"/>
+      <FILE id="ZHp7Fi" name="DataRace.h" compile="0" resource="0" file="Source/DataRace.h"/>
       <FILE id="L4NgAJ" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="F4uUD7" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
